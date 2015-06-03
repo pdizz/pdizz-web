@@ -78,6 +78,18 @@ return array(
                 'route_identifier_name' => 'post_id',
                 'is_collection' => true,
             ),
+            'BlogServices\\Post\\PostEntity' => array(
+                'entity_identifier_name' => 'id',
+                'route_name' => 'blog-api.rest.post',
+                'route_identifier_name' => 'post_id',
+                'hydrator' => 'Zend\\Stdlib\\Hydrator\\ClassMethods',
+            ),
+            'BlogServices\\Post\\PostCollection' => array(
+                'entity_identifier_name' => 'id',
+                'route_name' => 'blog-api.rest.post',
+                'route_identifier_name' => 'post_id',
+                'is_collection' => true,
+            ),
         ),
     ),
 );
