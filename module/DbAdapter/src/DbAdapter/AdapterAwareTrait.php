@@ -1,6 +1,6 @@
 <?php
 
-namespace Pdizz\DbAdapter;
+namespace DbAdapter;
 
 use Zend\Db\Adapter\Adapter;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Pdizz\Sql;
+namespace Sql;
 
-use Pdizz\DbAdapter\AdapterAwareTrait;
+use DbAdapter\AdapterAwareTrait;
 
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\AdapterAwareInterface;

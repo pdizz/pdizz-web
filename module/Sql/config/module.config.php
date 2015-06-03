@@ -1,7 +1,7 @@
 <?php
 
-use Pdizz\Sql\SqlService;
-use Pdizz\Sql\SqlServiceFactory;
+use Sql\SqlService;
+use Sql\SqlServiceFactory;
 
 return [
     'service_manager' => [

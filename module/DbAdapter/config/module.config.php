@@ -1,6 +1,6 @@
 <?php
 
-use Pdizz\DbAdapter\AdapterFactory;
+use DbAdapter\AdapterFactory;
 
 return [
     'service_manager' => [

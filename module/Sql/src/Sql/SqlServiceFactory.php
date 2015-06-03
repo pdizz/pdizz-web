@@ -1,6 +1,6 @@
 <?php
 
-namespace Pdizz\Sql;
+namespace Sql;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;

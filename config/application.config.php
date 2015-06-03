@@ -22,6 +22,10 @@ return array(
         'ZF\\Rest',
         'ZF\\Rpc',
         'ZF\\Versioning',
+        'DbAdapter',
+        'Sql',
+        'BlogApi',
+        'BlogServices'
     ),
     'module_listener_options' => array(
         'module_paths' => array(
