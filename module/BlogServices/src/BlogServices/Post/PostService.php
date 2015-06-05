@@ -22,6 +22,12 @@ class PostService
      */
     protected $postHydrator;
 
+    /**
+     * Fetch an individual blog post by it's unique id
+     *
+     * @param $postId
+     * @return PostEntity
+     */
     public function fetchById($postId)
     {
         $select = $this->selectById($postId);
@@ -34,6 +40,15 @@ class PostService
         return $this->getPostHydrator()->hydrate($result, new PostEntity());
     }
 
+    /**
+     * Fetch a filtered collection of blog posts
+     *
+     * Filters:
+     * * is_visible
+     *
+     * @param array $filters
+     * @return PostCollection
+     */
     public function fetchList(array $filters = [])
     {
         $select  = $this->selectWithFilters($filters);
@@ -42,6 +57,12 @@ class PostService
         );
     }
 
+    /**
+     * Create a new blog post record
+     *
+     * @param PostEntity $post
+     * @return PostEntity
+     */
     public function createPost(PostEntity $post)
     {
         $insert = $this->getPostInsert($post);
@@ -50,15 +71,26 @@ class PostService
         return $this->fetchById($this->getSqlService()->getLastInsertId());
     }
 
+    /**
+     * Update an existing blog post record
+     *
+     * @param $id
+     * @param PostEntity $post
+     * @return PostEntity
+     */
     public function updatePost($id, PostEntity $post)
     {
-        $post->setId($id);
-        $update = $this->getPostUpdate($post);
+        $update = $this->getPostUpdate($id, $post);
         $this->getSqlService()->execute($update);
 
         return $this->fetchById($id);
     }
 
+    /**
+     * Get a sql object to fetch all blog posts
+     *
+     * @return Select
+     */
     protected function selectPosts()
     {
         $select = new Select();
@@ -73,6 +105,12 @@ class PostService
         return $select;
     }
 
+    /**
+     * Get a sql object to fetch a specific blog post by id
+     *
+     * @param $postId
+     * @return Select
+     */
     protected function selectById($postId)
     {
         $select = $this->selectPosts()
@@ -81,6 +119,12 @@ class PostService
         return $select;
     }
 
+    /**
+     * Get a sql object to fetch a filtered list of blog posts
+     *
+     * @param array $filters
+     * @return Select
+     */
     protected function selectWithFilters(array $filters)
     {
         $select = $this->selectPosts();
@@ -92,6 +136,12 @@ class PostService
         return $select;
     }
 
+    /**
+     * Get a sql object to insert a new blog post
+     *
+     * @param PostEntity $post
+     * @return Insert
+     */
     protected function getPostInsert(PostEntity $post)
     {
         $insert = new Insert();
@@ -104,7 +154,14 @@ class PostService
         return $insert;
     }
 
-    protected function getPostUpdate(PostEntity $post)
+    /**
+     * Get a sql object to update an existing blog post
+     *
+     * @param int $id
+     * @param PostEntity $post
+     * @return Update
+     */
+    protected function getPostUpdate($id, PostEntity $post)
     {
         $update = new Update();
         $update->table(new TableIdentifier('blog_post'))
@@ -112,7 +169,7 @@ class PostService
                 'content' => $post->getContent(),
                 'is_visible' => $post->getIsVisible()
             ])
-            ->where(['blog_post_id' => $post->getId()]);
+            ->where(['blog_post_id' => $id]);
 
         return $update;
     }
