@@ -38,7 +38,9 @@ return array(
                 0 => 'GET',
                 1 => 'POST',
             ),
-            'collection_query_whitelist' => array(),
+            'collection_query_whitelist' => array(
+                0 => 'is_visible',
+            ),
             'page_size' => 25,
             'page_size_param' => null,
             'entity_class' => 'BlogServices\\Post\\PostEntity',
@@ -89,6 +91,29 @@ return array(
                 'route_name' => 'blog-api.rest.post',
                 'route_identifier_name' => 'post_id',
                 'is_collection' => true,
+            ),
+        ),
+    ),
+    'zf-content-validation' => array(
+        'BlogApi\\V1\\Rest\\Post\\Controller' => array(
+            'input_filter' => 'BlogApi\\V1\\Rest\\Post\\Validator',
+        ),
+    ),
+    'input_filter_specs' => array(
+        'BlogApi\\V1\\Rest\\Post\\Validator' => array(
+            0 => array(
+                'required' => true,
+                'validators' => array(),
+                'filters' => array(),
+                'name' => 'content',
+                'description' => 'The blog post content',
+            ),
+            1 => array(
+                'required' => true,
+                'validators' => array(),
+                'filters' => array(),
+                'name' => 'is_visible',
+                'description' => 'Is this post visible to users?',
             ),
         ),
     ),

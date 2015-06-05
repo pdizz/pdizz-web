@@ -1,9 +1,11 @@
 <?php
 namespace BlogApi\V1\Rest\Post;
 
+use BlogServices\Post\PostEntity;
+use BlogServices\Post\PostService;
 use ZF\ApiProblem\ApiProblem;
 use ZF\Rest\AbstractResourceListener;
-use BlogServices\Post\PostService;
+use Zend\Stdlib\Hydrator\HydratorInterface;
 
 class PostResource extends AbstractResourceListener
 {
@@ -13,6 +15,11 @@ class PostResource extends AbstractResourceListener
     protected $postService;
 
     /**
+     * @var HydratorInterface
+     */
+    protected $postHydrator;
+
+    /**
      * Create a resource
      *
      * @param  mixed $data
@@ -20,7 +27,10 @@ class PostResource extends AbstractResourceListener
      */
     public function create($data)
     {
-        return new ApiProblem(405, 'The POST method has not been defined');
+        $data = $this->getInputFilter()->getValues();
+        $post = $this->getPostHydrator()->hydrate($data, new PostEntity());
+
+        return $this->getPostService()->createPost($post);
     }
 
     /**
@@ -32,17 +42,6 @@ class PostResource extends AbstractResourceListener
     public function delete($id)
     {
         return new ApiProblem(405, 'The DELETE method has not been defined for individual resources');
-    }
-
-    /**
-     * Delete a collection, or members of a collection
-     *
-     * @param  mixed $data
-     * @return ApiProblem|mixed
-     */
-    public function deleteList($data)
-    {
-        return new ApiProblem(405, 'The DELETE method has not been defined for collections');
     }
 
     /**
@@ -64,7 +63,7 @@ class PostResource extends AbstractResourceListener
      */
     public function fetchAll($params = array())
     {
-        return new ApiProblem(405, 'The GET method has not been defined for collections');
+        return $this->getPostService()->fetchList((array) $params);
     }
 
     /**
@@ -76,18 +75,13 @@ class PostResource extends AbstractResourceListener
      */
     public function patch($id, $data)
     {
-        return new ApiProblem(405, 'The PATCH method has not been defined for individual resources');
-    }
+        $data    = $this->getInputFilter()->getValues();
+        $current = $this->getPostService()->fetchById($id);
 
-    /**
-     * Replace a collection or members of a collection
-     *
-     * @param  mixed $data
-     * @return ApiProblem|mixed
-     */
-    public function replaceList($data)
-    {
-        return new ApiProblem(405, 'The PUT method has not been defined for collections');
+        // Hydrate new data over old post to patch it
+        $post = $this->getPostHydrator()->hydrate($data, $current);
+
+        return $this->getPostService()->updatePost($id, $post);
     }
 
     /**
@@ -99,7 +93,10 @@ class PostResource extends AbstractResourceListener
      */
     public function update($id, $data)
     {
-        return new ApiProblem(405, 'The PUT method has not been defined for individual resources');
+        $data = $this->getInputFilter()->getValues();
+        $post = $this->getPostHydrator()->hydrate($data, new PostEntity());
+
+        return $this->getPostService()->updatePost($id, $post);
     }
 
     /**
@@ -116,5 +113,21 @@ class PostResource extends AbstractResourceListener
     public function setPostService(PostService $postService)
     {
         $this->postService = $postService;
+    }
+
+    /**
+     * @return HydratorInterface
+     */
+    public function getPostHydrator()
+    {
+        return $this->postHydrator;
+    }
+
+    /**
+     * @param HydratorInterface $postHydrator
+     */
+    public function setPostHydrator(HydratorInterface $postHydrator)
+    {
+        $this->postHydrator = $postHydrator;
     }
 }
