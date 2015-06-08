@@ -33,6 +33,7 @@ return array(
                 0 => 'GET',
                 1 => 'PATCH',
                 2 => 'PUT',
+                3 => 'DELETE',
             ),
             'collection_http_methods' => array(
                 0 => 'GET',
@@ -114,6 +115,26 @@ return array(
                 'filters' => array(),
                 'name' => 'is_visible',
                 'description' => 'Is this post visible to users?',
+            ),
+        ),
+    ),
+    'zf-mvc-auth' => array(
+        'authorization' => array(
+            'BlogApi\\V1\\Rest\\Post\\Controller' => array(
+                'collection' => array(
+                    'GET' => false,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ),
+                'entity' => array(
+                    'GET' => false,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ),
             ),
         ),
     ),
