@@ -1,5 +1,6 @@
 CREATE TABLE `pdizz`.`blog_post` (
   `blog_post_id` INT NOT NULL AUTO_INCREMENT,
+  `title` MEDIUMTEXT NOT NULL,
   `content` LONGTEXT NOT NULL,
   `is_visible` TINYINT NOT NULL DEFAULT 0,
   `created_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
