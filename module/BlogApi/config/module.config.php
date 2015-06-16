@@ -41,9 +41,11 @@ return array(
             ),
             'collection_query_whitelist' => array(
                 0 => 'is_visible',
+                1 => 'page',
+                2 => 'page_size',
             ),
             'page_size' => 25,
-            'page_size_param' => null,
+            'page_size_param' => 'page_size',
             'entity_class' => 'BlogServices\\Post\\PostEntity',
             'collection_class' => 'BlogServices\\Post\\PostCollection',
             'service_name' => 'Post',
@@ -115,6 +117,32 @@ return array(
                 'filters' => array(),
                 'name' => 'is_visible',
                 'description' => 'Is this post visible to users?',
+            ),
+            2 => array(
+                'required' => true,
+                'validators' => array(
+                    0 => array(
+                        'name' => 'Zend\\Validator\\StringLength',
+                        'options' => array(
+                            'max' => '200',
+                        ),
+                    ),
+                ),
+                'filters' => array(),
+                'name' => 'title',
+            ),
+            3 => array(
+                'required' => true,
+                'validators' => array(
+                    0 => array(
+                        'name' => 'Zend\\Validator\\StringLength',
+                        'options' => array(
+                            'max' => '80',
+                        ),
+                    ),
+                ),
+                'filters' => array(),
+                'name' => 'author',
             ),
         ),
     ),

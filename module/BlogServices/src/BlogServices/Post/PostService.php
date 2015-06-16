@@ -97,6 +97,8 @@ class PostService
         $select->from(new TableIdentifier('blog_post'))
             ->columns([
                 'id' => 'blog_post_id',
+                'title',
+                'author',
                 'content',
                 'is_visible',
                 'created_timestamp'
@@ -147,6 +149,8 @@ class PostService
         $insert = new Insert();
         $insert->into(new TableIdentifier('blog_post'))
             ->values([
+                'title' => $post->getTitle(),
+                'author' => $post->getAuthor(),
                 'content' => $post->getContent(),
                 'is_visible' => $post->getIsVisible()
             ]);
@@ -166,6 +170,8 @@ class PostService
         $update = new Update();
         $update->table(new TableIdentifier('blog_post'))
             ->set([
+                'title' => $post->getTitle(),
+                'author' => $post->getAuthor(),
                 'content' => $post->getContent(),
                 'is_visible' => $post->getIsVisible()
             ])
