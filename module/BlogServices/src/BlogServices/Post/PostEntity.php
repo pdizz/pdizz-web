@@ -11,6 +11,16 @@ class PostEntity
     /**
      * @var string
      */
+    protected $title;
+
+    /**
+     * @var string
+     */
+    protected $author;
+
+    /**
+     * @var string
+     */
     protected $content;
 
     /**
@@ -22,6 +32,38 @@ class PostEntity
      * @var string
      */
     protected $createdTimestamp;
+
+    /**
+     * @return string
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param string $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
 
     /**
      * @return string
