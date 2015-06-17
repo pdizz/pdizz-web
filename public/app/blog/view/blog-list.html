@@ -1,0 +1,18 @@
+<div class="col-sm-8 blog-main">
+
+    <div ng-cloak ng-repeat="post in posts" class="blog-post">
+        <h2 class="blog-post-title"><a href="#/blog/{{ post.id }}">{{ post.title }}</a></h2>
+        <p class="blog-post-meta">{{ toDate(post.created_timestamp) | date:'mediumDate' }}</p>
+
+        <p>{{ post.content }}</p>
+
+    </div>
+
+    <nav>
+        <ul class="pager">
+            <li><a href="#">Previous</a></li>
+            <li><a href="#">Next</a></li>
+        </ul>
+    </nav>
+
+</div>
