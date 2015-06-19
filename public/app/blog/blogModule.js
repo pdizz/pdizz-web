@@ -15,7 +15,7 @@ blogModule.controller('BlogListController', ['$scope', '$http',
          */
         $scope.toDate = function(date) {
             return new Date(date);
-        }
+        };
     }]);
 
 blogModule.controller('BlogDetailController', ['$scope', '$http', '$routeParams',
@@ -31,5 +31,5 @@ blogModule.controller('BlogDetailController', ['$scope', '$http', '$routeParams'
          */
         $scope.toDate = function(date) {
             return new Date(date);
-        }
+        };
     }]);

@@ -2,7 +2,7 @@
 
 var pdizzApp = angular.module('pdizzApp', [
     'ngRoute',
-    'blogControllers'
+    'blogModule'
 ]);
 
 pdizzApp.config(['$routeProvider', function ($routeProvider) {
