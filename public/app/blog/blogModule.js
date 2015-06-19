@@ -1,8 +1,8 @@
 'use strict';
 
-var blogControllers = angular.module('blogControllers', []);
+var blogModule = angular.module('blogModule', []);
 
-blogControllers.controller('BlogListController', ['$scope', '$http',
+blogModule.controller('BlogListController', ['$scope', '$http',
     function ($scope, $http) {
         $http.get('/api/blog/post').success(function (data) {
             $scope.posts = data._embedded.post;
@@ -14,11 +14,11 @@ blogControllers.controller('BlogListController', ['$scope', '$http',
          * @returns {Date}
          */
         $scope.toDate = function(date) {
-            return new Date(Date.parse(date));
+            return new Date(date);
         }
     }]);
 
-blogControllers.controller('BlogDetailController', ['$scope', '$http', '$routeParams',
+blogModule.controller('BlogDetailController', ['$scope', '$http', '$routeParams',
     function ($scope, $http, $routeParams) {
         $http.get('/api/blog/post/' + $routeParams.postId).success(function (data) {
             $scope.post = data;
@@ -30,6 +30,6 @@ blogControllers.controller('BlogDetailController', ['$scope', '$http', '$routePa
          * @returns {Date}
          */
         $scope.toDate = function(date) {
-            return new Date(Date.parse(date));
+            return new Date(date);
         }
     }]);
