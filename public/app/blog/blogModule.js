@@ -1,12 +1,21 @@
 'use strict';
 
-var blogModule = angular.module('blogModule', []);
+var blogModule = angular.module('blogModule', ['ngResource']);
 
-blogModule.controller('BlogListController', ['$scope', '$http',
-    function ($scope, $http) {
-        $http.get('/api/blog/post').success(function (data) {
-            $scope.posts = data._embedded.post;
+blogModule.factory('PostService', ['$resource',
+    function ($resource) {
+        return $resource('api/blog/post/:postId', {}, {
+            get: {method: 'GET'},
+            query: {method: 'GET', isArray: false}
         });
+    }]);
+
+blogModule.controller('BlogListController', ['$scope', 'PostService',
+    function ($scope, PostService) {
+        PostService.query({'is_visible': 1}, function(data) {
+            $scope.posts = data._embedded.post
+        });
+
 
         /**
          * Turn the string into a Date object
@@ -18,9 +27,9 @@ blogModule.controller('BlogListController', ['$scope', '$http',
         };
     }]);
 
-blogModule.controller('BlogDetailController', ['$scope', '$http', '$routeParams',
-    function ($scope, $http, $routeParams) {
-        $http.get('/api/blog/post/' + $routeParams.postId).success(function (data) {
+blogModule.controller('BlogDetailController', ['$scope', '$routeParams', 'PostService',
+    function ($scope, $routeParams, PostService) {
+        PostService.get({postId: $routeParams.postId}, function(data) {
             $scope.post = data;
         });
 
