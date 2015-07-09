@@ -13,6 +13,9 @@ pdizzApp.config(['$routeProvider', function ($routeProvider) {
         .when('/page/about', {
             templateUrl: 'app/page/view/about.html'
         })
+        .when('/page/cv', {
+            templateUrl: 'app/page/view/cv.html'
+        })
         .when('/blog', {
             templateUrl: 'app/blog/view/blog-list.html',
             controller: 'BlogListController'
