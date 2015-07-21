@@ -7,14 +7,11 @@ var pdizzApp = angular.module('pdizzApp', [
 
 pdizzApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-        .when('/page/home', {
-            templateUrl: 'app/page/view/home.html'
-        })
         .when('/page/about', {
             templateUrl: 'app/page/view/about.html'
         })
-        .when('/page/cv', {
-            templateUrl: 'app/page/view/cv.html'
+        .when('/page/code', {
+            templateUrl: 'app/page/view/code.html'
         })
         .when('/blog', {
             templateUrl: 'app/blog/view/blog-list.html',
@@ -25,6 +22,6 @@ pdizzApp.config(['$routeProvider', function ($routeProvider) {
             controller: 'BlogDetailController'
         })
         .otherwise({
-            redirectTo: '/page/home'
+            redirectTo: '/blog'
         })
 }]);
