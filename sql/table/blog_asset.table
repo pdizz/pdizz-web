@@ -1,0 +1,7 @@
+CREATE TABLE `pdizz`.`blog_asset` (
+  `blog_asset_id` INT NOT NULL AUTO_INCREMENT,
+  `blog_post_id` INT NOT NULL,
+  `baseurl` VARCHAR(200) NOT NULL,
+  `directory` VARCHAR(200) NOT NULL,
+  `filename` VARCHAR(200) NOT NULL,
+  PRIMARY KEY (`blog_asset_id`));

@@ -11,16 +11,30 @@ return array(
                     ),
                 ),
             ),
+            'blog-api.rest.asset' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/api/blog/asset[/:asset_id]',
+                    'defaults' => array(
+                        'controller' => 'BlogApi\\V1\\Rest\\Asset\\Controller',
+                    ),
+                ),
+            ),
         ),
     ),
     'zf-versioning' => array(
         'uri' => array(
             0 => 'blog-api.rest.post',
+            1 => 'blog-api.rest.asset',
         ),
     ),
     'service_manager' => array(
+        'invokables' => array(
+            'BlogApi\\V1\\Rest\\Asset\\AssetHalListener' => 'BlogApi\\V1\\Rest\\Asset\\AssetHalListener',
+        ),
         'factories' => array(
             'BlogApi\\V1\\Rest\\Post\\PostResource' => 'BlogApi\\V1\\Rest\\Post\\PostResourceFactory',
+            'BlogApi\\V1\\Rest\\Asset\\AssetResource' => 'BlogApi\\V1\\Rest\\Asset\\AssetResourceFactory',
         ),
     ),
     'zf-rest' => array(
@@ -50,13 +64,44 @@ return array(
             'collection_class' => 'BlogServices\\Post\\PostCollection',
             'service_name' => 'Post',
         ),
+        'BlogApi\\V1\\Rest\\Asset\\Controller' => array(
+            'listener' => 'BlogApi\\V1\\Rest\\Asset\\AssetResource',
+            'route_name' => 'blog-api.rest.asset',
+            'route_identifier_name' => 'asset_id',
+            'collection_name' => 'asset',
+            'entity_http_methods' => array(
+                0 => 'GET',
+                1 => 'DELETE',
+                2 => 'POST',
+            ),
+            'collection_http_methods' => array(
+                0 => 'GET',
+                1 => 'POST',
+            ),
+            'collection_query_whitelist' => array(
+                0 => 'page_size',
+                1 => 'page',
+                2 => 'blog_post_id',
+            ),
+            'page_size' => 25,
+            'page_size_param' => 'page_size',
+            'entity_class' => 'BlogServices\\Asset\\AssetEntity',
+            'collection_class' => 'BlogServices\\Asset\\AssetCollection',
+            'service_name' => 'Asset',
+        ),
     ),
     'zf-content-negotiation' => array(
         'controllers' => array(
             'BlogApi\\V1\\Rest\\Post\\Controller' => 'HalJson',
+            'BlogApi\\V1\\Rest\\Asset\\Controller' => 'HalJson',
         ),
         'accept_whitelist' => array(
             'BlogApi\\V1\\Rest\\Post\\Controller' => array(
+                0 => 'application/vnd.blog-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ),
+            'BlogApi\\V1\\Rest\\Asset\\Controller' => array(
                 0 => 'application/vnd.blog-api.v1+json',
                 1 => 'application/hal+json',
                 2 => 'application/json',
@@ -66,6 +111,11 @@ return array(
             'BlogApi\\V1\\Rest\\Post\\Controller' => array(
                 0 => 'application/vnd.blog-api.v1+json',
                 1 => 'application/json',
+            ),
+            'BlogApi\\V1\\Rest\\Asset\\Controller' => array(
+                0 => 'application/vnd.blog-api.v1+json',
+                1 => 'application/json',
+                2 => 'multipart/form-data',
             ),
         ),
     ),
@@ -95,11 +145,38 @@ return array(
                 'route_identifier_name' => 'post_id',
                 'is_collection' => true,
             ),
+            'BlogApi\\V1\\Rest\\Asset\\AssetEntity' => array(
+                'entity_identifier_name' => 'id',
+                'route_name' => 'blog-api.rest.asset',
+                'route_identifier_name' => 'asset_id',
+                'hydrator' => 'Zend\\Stdlib\\Hydrator\\ArraySerializable',
+            ),
+            'BlogApi\\V1\\Rest\\Asset\\AssetCollection' => array(
+                'entity_identifier_name' => 'id',
+                'route_name' => 'blog-api.rest.asset',
+                'route_identifier_name' => 'asset_id',
+                'is_collection' => true,
+            ),
+            'BlogServices\\Asset\\AssetEntity' => array(
+                'entity_identifier_name' => 'id',
+                'route_name' => 'blog-api.rest.asset',
+                'route_identifier_name' => 'asset_id',
+                'hydrator' => 'Zend\\Stdlib\\Hydrator\\ClassMethods',
+            ),
+            'BlogServices\\Asset\\AssetCollection' => array(
+                'entity_identifier_name' => 'id',
+                'route_name' => 'blog-api.rest.asset',
+                'route_identifier_name' => 'asset_id',
+                'is_collection' => true,
+            ),
         ),
     ),
     'zf-content-validation' => array(
         'BlogApi\\V1\\Rest\\Post\\Controller' => array(
             'input_filter' => 'BlogApi\\V1\\Rest\\Post\\Validator',
+        ),
+        'BlogApi\\V1\\Rest\\Asset\\Controller' => array(
+            'input_filter' => 'BlogApi\\V1\\Rest\\Asset\\Validator',
         ),
     ),
     'input_filter_specs' => array(
@@ -145,6 +222,28 @@ return array(
                 'name' => 'author',
             ),
         ),
+        'BlogApi\\V1\\Rest\\Asset\\Validator' => array(
+            0 => array(
+                'required' => true,
+                'validators' => array(),
+                'filters' => array(),
+                'name' => 'blog_post_id',
+            ),
+            1 => array(
+                'required' => true,
+                'filters' => array(),
+                'validators' => array(
+                    0 => array(
+                        'name' => 'Zend\\Validator\\File\\IsImage',
+                        'options' => array(),
+                    ),
+                ),
+                'type' => 'Zend\\InputFilter\\FileInput',
+                'allow_empty' => false,
+                'continue_if_empty' => false,
+                'name' => 'file',
+            ),
+        ),
     ),
     'zf-mvc-auth' => array(
         'authorization' => array(
@@ -161,6 +260,22 @@ return array(
                     'POST' => false,
                     'PUT' => true,
                     'PATCH' => true,
+                    'DELETE' => true,
+                ),
+            ),
+            'BlogApi\\V1\\Rest\\Asset\\Controller' => array(
+                'collection' => array(
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ),
+                'entity' => array(
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
                     'DELETE' => true,
                 ),
             ),

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "326211785a334dad29079c79e6f104a7",
+    "hash": "718325273106dbefd4b824652e7271f8",
     "packages": [
         {
             "name": "bshaffer/oauth2-server-php",
@@ -1670,20 +1670,20 @@
         },
         {
             "name": "zfcampus/zf-apigility-admin",
-            "version": "1.1.2",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zfcampus/zf-apigility-admin.git",
-                "reference": "a47e0a45019f50108965b5ce7e4e136c1dc3a3ff"
+                "reference": "4464f52905ed8a07aa264e7f4ed1589787c1a2b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zfcampus/zf-apigility-admin/zipball/a47e0a45019f50108965b5ce7e4e136c1dc3a3ff",
-                "reference": "a47e0a45019f50108965b5ce7e4e136c1dc3a3ff",
+                "url": "https://api.github.com/repos/zfcampus/zf-apigility-admin/zipball/4464f52905ed8a07aa264e7f4ed1589787c1a2b7",
+                "reference": "4464f52905ed8a07aa264e7f4ed1589787c1a2b7",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.23",
+                "php": ">=5.5",
                 "zendframework/zend-code": "~2.3",
                 "zendframework/zend-eventmanager": "~2.3",
                 "zendframework/zend-filter": "~2.3",
@@ -1694,10 +1694,10 @@
                 "zendframework/zend-servicemanager": "~2.3",
                 "zendframework/zend-stdlib": "~2.3",
                 "zendframework/zend-validator": "~2.3",
-                "zendframework/zend-view": "~2.3",
+                "zendframework/zend-view": ">2.3",
                 "zfcampus/zf-api-problem": "~1.0",
                 "zfcampus/zf-apigility": "~1.0",
-                "zfcampus/zf-apigility-admin-ui": ">=1.1.4,<2.0",
+                "zfcampus/zf-apigility-admin-ui": "^1.1.4",
                 "zfcampus/zf-apigility-provider": "~1.0",
                 "zfcampus/zf-configuration": "~1.0",
                 "zfcampus/zf-content-negotiation": "~1.0",
@@ -1710,8 +1710,8 @@
                 "zfcampus/zf-versioning": "~1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*",
-                "squizlabs/php_codesniffer": "~2.0",
+                "phpunit/phpunit": "~4.7",
+                "squizlabs/php_codesniffer": "^2.3.1",
                 "zendframework/zend-config": "~2.3",
                 "zendframework/zend-loader": "~2.3",
                 "zfcampus/zf-deploy": "~1.0"
@@ -1719,14 +1719,13 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev",
-                    "dev-develop": "1.2-dev"
+                    "dev-master": "1.3-dev",
+                    "dev-develop": "1.4-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "ZF\\Apigility\\Admin\\": "src/",
-                    "ZFTest\\Apigility\\Admin\\": "test/"
+                    "ZF\\Apigility\\Admin\\": "src/"
                 },
                 "classmap": [
                     "Module.php"
@@ -1744,7 +1743,7 @@
                 "framework",
                 "zf2"
             ],
-            "time": "2015-04-21 20:30:31"
+            "time": "2015-07-15 15:22:20"
         },
         {
             "name": "zfcampus/zf-apigility-admin-ui",

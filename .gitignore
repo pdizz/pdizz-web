@@ -8,6 +8,7 @@ nbproject
 .settings
 vendor/
 public/vendor/
+public/files/
 config/development.config.php
 config/autoload/local.php
 config/autoload/*.local.php
