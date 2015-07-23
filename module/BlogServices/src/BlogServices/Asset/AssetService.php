@@ -3,10 +3,12 @@
 namespace BlogServices\Asset;
 
 use Sql\SqlService;
+use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\TableIdentifier;
 use Zend\Paginator\Adapter\DbSelect;
+use Zend\Stdlib\Hydrator\ClassMethods;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 
 class AssetService
@@ -86,8 +88,14 @@ class AssetService
     public function fetchList(array $filters = [])
     {
         $select = $this->selectWithFilters($filters);
+
+        $resultSetPrototype = new HydratingResultSet(
+            $this->getAssetHydrator(),
+            new AssetEntity()
+        );
+
         return new AssetCollection(
-            new DbSelect($select, $this->getSqlService()->getDbAdapter())
+            new DbSelect($select, $this->getSqlService()->getDbAdapter(), $resultSetPrototype)
         );
     }
 

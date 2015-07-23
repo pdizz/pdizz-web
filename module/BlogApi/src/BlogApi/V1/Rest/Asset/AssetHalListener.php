@@ -15,7 +15,7 @@ class AssetHalListener implements ServiceLocatorAwareInterface
     use ServiceLocatorAwareTrait;
 
     /**
-     * Attach download link to asset on request for a single entity
+     * Attach download link to asset HAL metadata
      *
      * @param Event $event
      */
@@ -32,24 +32,5 @@ class AssetHalListener implements ServiceLocatorAwareInterface
             . '/' . $halEntity->entity->getFilename());
 
         $halEntity->getLinks()->add($link);
-    }
-
-    /**
-     * Attach download links to assets on request for collection
-     *
-     * @param Event $event
-     */
-    public function attachAssetLinkCollection(Event $event)
-    {
-        $uri = $this->getServiceLocator()->get('Router')->getRequestUri();
-
-        $payload = $event->getParam('payload');
-        foreach ($payload['_embedded']['asset'] as &$asset) {
-            $asset['_links']['download'] = [
-                'href' => $uri->getScheme() . '://' . $uri->getHost()
-                    . '/' . $asset['baseurl']
-                    . '/' . $asset['filename']
-            ];
-        }
     }
 }

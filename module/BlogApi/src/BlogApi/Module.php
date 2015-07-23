@@ -37,10 +37,6 @@ class Module implements ApigilityProviderInterface
             'renderEntity',
             array($listener, 'attachAssetLink')
         );
-        $hal->getEventManager()->attach(
-            'renderCollection.post',
-            array($listener, 'attachAssetLinkCollection')
-        );
     }
 
     public function getConfig()
