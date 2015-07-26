@@ -189,9 +189,14 @@ return array(
                 'description' => 'The blog post content',
             ),
             1 => array(
-                'required' => true,
+                'required' => false,
                 'validators' => array(),
-                'filters' => array(),
+                'filters' => array(
+                    0 => array(
+                        'name' => 'Zend\\Filter\\Boolean',
+                        'options' => array(),
+                    ),
+                ),
                 'name' => 'is_visible',
                 'description' => 'Is this post visible to users?',
             ),
@@ -250,7 +255,7 @@ return array(
             'BlogApi\\V1\\Rest\\Post\\Controller' => array(
                 'collection' => array(
                     'GET' => false,
-                    'POST' => true,
+                    'POST' => false,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
@@ -258,25 +263,25 @@ return array(
                 'entity' => array(
                     'GET' => false,
                     'POST' => false,
-                    'PUT' => true,
-                    'PATCH' => true,
-                    'DELETE' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
                 ),
             ),
             'BlogApi\\V1\\Rest\\Asset\\Controller' => array(
                 'collection' => array(
-                    'GET' => true,
-                    'POST' => true,
+                    'GET' => false,
+                    'POST' => false,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
                 ),
                 'entity' => array(
-                    'GET' => true,
-                    'POST' => true,
+                    'GET' => false,
+                    'POST' => false,
                     'PUT' => false,
                     'PATCH' => false,
-                    'DELETE' => true,
+                    'DELETE' => false,
                 ),
             ),
         ),

@@ -1,18 +1,19 @@
 'use strict';
 
-var blogModule = angular.module('blogModule', ['ngResource']);
+var blogModule = angular.module('blogModule', ['ngResource', 'ui.router']);
 
-blogModule.factory('PostService', ['$resource',
+blogModule.factory('PostResource', ['$resource',
     function ($resource) {
         return $resource('api/blog/post/:postId', {}, {
-            get: {method: 'GET'},
-            query: {method: 'GET', isArray: false}
+            query: {method: 'GET', isArray: false},
+            update: {method: 'PUT'}
         });
-    }]);
+    }
+]);
 
-blogModule.controller('BlogListController', ['$scope', 'PostService',
-    function ($scope, PostService) {
-        PostService.query({'is_visible': 1}, function(data) {
+blogModule.controller('PostListController', ['$scope', '$state', 'PostResource',
+    function ($scope, $state, PostResource) {
+        PostResource.query({'is_visible': 1}, function (data) {
             $scope.posts = data._embedded.post
         });
 
@@ -25,13 +26,12 @@ blogModule.controller('BlogListController', ['$scope', 'PostService',
         $scope.toDate = function(date) {
             return new Date(date);
         };
-    }]);
+    }
+]);
 
-blogModule.controller('BlogDetailController', ['$scope', '$routeParams', 'PostService',
-    function ($scope, $routeParams, PostService) {
-        PostService.get({postId: $routeParams.postId}, function(data) {
-            $scope.post = data;
-        });
+blogModule.controller('PostViewController', ['$scope', '$stateParams', 'PostResource',
+    function ($scope, $stateParams, PostResource) {
+        $scope.post = PostResource.get({postId: $stateParams.postId});
 
         /**
          * Turn the string into a Date object
@@ -41,4 +41,26 @@ blogModule.controller('BlogDetailController', ['$scope', '$routeParams', 'PostSe
         $scope.toDate = function(date) {
             return new Date(date);
         };
-    }]);
+    }
+]);
+
+blogModule.controller('PostCreateController', ['$scope', '$state', 'PostResource',
+    function ($scope, $state, PostResource) {
+        $scope.post = new PostResource();
+        $scope.addPost = function () {
+            $scope.post.$save(function (post) {
+                // Continue editing post
+                $state.go('blogEdit', {postId: post.id});
+            });
+        }
+    }
+]);
+
+blogModule.controller('PostEditController', ['$scope', '$stateParams', 'PostResource',
+    function ($scope, $stateParams, PostResource) {
+        $scope.post = PostResource.get({postId: $stateParams.postId});
+        $scope.updatePost = function () {
+            $scope.post.$update({postId: $stateParams.postId});
+        }
+    }
+]);

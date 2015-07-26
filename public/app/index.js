@@ -1,27 +1,42 @@
 'use strict';
 
 var pdizzApp = angular.module('pdizzApp', [
-    'ngRoute',
+    'ui.router',
     'blogModule'
 ]);
 
-pdizzApp.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider
-        .when('/page/about', {
+pdizzApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider
+        // Default to
+        .otherwise('blog');
+
+    $stateProvider
+        .state('about', {
+            url: '/about',
             templateUrl: 'app/page/view/about.html'
         })
-        .when('/page/code', {
+        .state('code', {
+            url: '/code',
             templateUrl: 'app/page/view/code.html'
         })
-        .when('/blog', {
+        .state('blog', {
+            url: '/blog',
             templateUrl: 'app/blog/view/blog-list.html',
-            controller: 'BlogListController'
+            controller: 'PostListController'
         })
-        .when('/blog/:postId', {
+        .state('blogView', {
+            url: '/blog/post/{postId:[0-9]}',
             templateUrl: 'app/blog/view/blog-detail.html',
-            controller: 'BlogDetailController'
+            controller: 'PostViewController'
         })
-        .otherwise({
-            redirectTo: '/blog'
+        .state('blogCreate', {
+            url: '/blog/post/new',
+            templateUrl: 'app/blog/view/blog-create.html',
+            controller: 'PostCreateController'
         })
+        .state('blogEdit', {
+            url: '/blog/post/{postId:[0-9]}/edit',
+            templateUrl: 'app/blog/view/blog-edit.html',
+            controller: 'PostEditController'
+        });
 }]);

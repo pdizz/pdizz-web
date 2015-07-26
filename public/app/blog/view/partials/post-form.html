@@ -1,0 +1,19 @@
+<div class="form-group">
+    <label for="title">Title</label><br />
+    <input type="text" ng-model="post.title" placeholder="Post title..." />
+</div>
+<div class="form-group">
+    <label for="author">Author</label><br />
+    <input type="text" ng-model="post.author" placeholder="Your name" />
+</div>
+<div class="form-group">
+    <label for="content">Content</label><br />
+    <textarea ng-model="post.content"></textarea>
+</div>
+<div class="form-group">
+    <label for="visible">Visible?</label>
+    <input type="checkbox" ng-model="post.is_visible" ng-checked="post.is_visible" />
+</div>
+<div class="form-group">
+    <input type="submit" class="btn btn-primary" value="Save" />
+</div>

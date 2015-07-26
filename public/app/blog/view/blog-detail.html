@@ -1,6 +1,6 @@
 <div class="blog-main">
 
-    <div ng-show="post" class="blog-post">
+    <div ng-show="post.title" class="blog-post">
         <h2 class="blog-post-title">{{ post.title }}</h2>
         <p class="blog-post-meta">{{ toDate(post.created_timestamp) | date:'mediumDate' }} by {{ post.author }}</p>
 

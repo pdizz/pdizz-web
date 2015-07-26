@@ -1,10 +1,10 @@
 <div class="blog-main">
 
     <div ng-show="posts" ng-repeat="post in posts" class="blog-post">
-        <h2 class="blog-post-title"><a href="#/blog/{{ post.id }}">{{ post.title }}</a></h2>
+        <h2 class="blog-post-title"><a ui-sref="blogView({postId:post.id})">{{ post.title }}</a></h2>
         <p class="blog-post-meta">{{ toDate(post.created_timestamp) | date:'mediumDate' }}</p>
 
-        <p>{{ post.content | limitTo: 200 }} <a href="#/blog/{{ post.id }}">...more</a></p>
+        <p>{{ post.content | limitTo: 200 }} <a ui-sref="blogView({postId:post.id})">...more</a></p>
 
     </div>
 
