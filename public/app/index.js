@@ -8,7 +8,7 @@ var pdizzApp = angular.module('pdizzApp', [
 pdizzApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider
         // Default to
-        .otherwise('blog');
+        .otherwise('/blog');
 
     $stateProvider
         .state('about', {
@@ -25,7 +25,7 @@ pdizzApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             controller: 'PostListController'
         })
         .state('blogView', {
-            url: '/blog/post/{postId:[0-9]}',
+            url: '/blog/post/{postId:int}',
             templateUrl: 'app/blog/view/blog-detail.html',
             controller: 'PostViewController'
         })
@@ -35,7 +35,7 @@ pdizzApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             controller: 'PostCreateController'
         })
         .state('blogEdit', {
-            url: '/blog/post/{postId:[0-9]}/edit',
+            url: '/blog/post/{postId:int}/edit',
             templateUrl: 'app/blog/view/blog-edit.html',
             controller: 'PostEditController'
         });

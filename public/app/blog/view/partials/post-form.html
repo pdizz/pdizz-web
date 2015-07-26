@@ -1,19 +1,19 @@
 <div class="form-group">
-    <label for="title">Title</label><br />
-    <input type="text" ng-model="post.title" placeholder="Post title..." />
+    <label for="title" class="col-sm-2 control-label">Title</label>
+    <input type="text" class="col-sm-10" ng-model="post.title" placeholder="Post title..." />
 </div>
 <div class="form-group">
-    <label for="author">Author</label><br />
-    <input type="text" ng-model="post.author" placeholder="Your name" />
+    <label for="author" class="col-sm-2 control-label">Author</label>
+    <input type="text" class="col-sm-10" ng-model="post.author" placeholder="Your name" />
 </div>
 <div class="form-group">
-    <label for="content">Content</label><br />
-    <textarea ng-model="post.content"></textarea>
+    <label for="content" class="col-sm-2 control-label">Content</label>
+    <textarea class="col-sm-10" rows="20" ng-model="post.content"></textarea>
 </div>
 <div class="form-group">
-    <label for="visible">Visible?</label>
-    <input type="checkbox" ng-model="post.is_visible" ng-checked="post.is_visible" />
+    <label for="visible" class="col-sm-2 control-label">Visible?</label>
+    <input type="checkbox"ng-model="post.is_visible" ng-checked="post.is_visible" />
 </div>
 <div class="form-group">
-    <input type="submit" class="btn btn-primary" value="Save" />
+    <input type="submit" class="col-sm-offset-2" value="Save" />
 </div>
