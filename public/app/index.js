@@ -20,7 +20,7 @@ pdizzApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvide
             templateUrl: 'app/page/view/code.html'
         })
         .state('blog', {
-            url: '/blog',
+            url: '/blog?page',
             templateUrl: 'app/blog/view/blog-list.html',
             controller: 'PostListController'
         })

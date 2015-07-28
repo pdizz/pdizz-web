@@ -11,11 +11,15 @@ blogModule.factory('PostResource', ['$resource',
     }
 ]);
 
-blogModule.controller('PostListController', ['$scope', '$state', 'PostResource',
-    function ($scope, $state, PostResource) {
-        PostResource.query({'is_visible': 1}, function (data) {
-            $scope.posts = data._embedded.post
-        });
+blogModule.controller('PostListController', ['$scope', '$state', '$stateParams', 'PostResource',
+    function ($scope, $state, $stateParams, PostResource) {
+        PostResource.query(
+            {'is_visible': 1, 'page': $stateParams.page, 'page_size': 5},
+            function (data) {
+                $scope.posts     = data._embedded.post;
+                $scope.page      = data.page;
+                $scope.pageCount = data.page_count;
+            });
 
 
         /**
