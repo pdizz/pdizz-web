@@ -4,7 +4,7 @@
         <h2 class="blog-post-title"><a ui-sref="blogView({postId:post.id})">{{ post.title }}</a></h2>
         <p class="blog-post-meta">{{ toDate(post.created_timestamp) | date:'mediumDate' }}</p>
 
-        <p>{{ post.content | limitTo: 200 }} <a ui-sref="blogView({postId:post.id})">...more</a></p>
+        <p> <div marked="post.content | cut:true:200"></div><a ui-sref="blogView({postId:post.id})"> ...more</a></p>
 
     </div>
 

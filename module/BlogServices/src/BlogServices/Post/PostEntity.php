@@ -128,5 +128,4 @@ class PostEntity
     {
         $this->isVisible = $isVisible;
     }
-
 }

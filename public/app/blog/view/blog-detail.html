@@ -4,7 +4,7 @@
         <h2 class="blog-post-title">{{ post.title }}</h2>
         <p class="blog-post-meta">{{ toDate(post.created_timestamp) | date:'mediumDate' }} by {{ post.author }}</p>
 
-        <p>{{ post.content }}</p>
+        <p marked="post.content"></p>
     </div>
 
 </div>
