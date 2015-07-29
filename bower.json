@@ -1,0 +1,15 @@
+{
+  "name": "pdizz-web",
+  "version": "0.0.1",
+  "authors": [
+    "Pete Albrecht"
+  ],
+  "dependencies": {
+    "angular": "~1.4.3",
+    "angular-ui-router": "~0.2.15",
+    "angular-marked": "~0.0.21",
+    "angular-resource": "~1.4.3",
+    "highlightjs": "~8.6.0"
+  },
+  "private": true
+}
