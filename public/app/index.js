@@ -3,7 +3,9 @@
 var pdizzApp = angular.module('pdizzApp', [
     'ui.router',
     'hc.marked',
-    'blogModule'
+    'ngCookies',
+    'BlogModule',
+    'AuthModule'
 ]);
 
 pdizzApp.config(['$stateProvider', '$urlRouterProvider', 'markedProvider',
@@ -40,6 +42,12 @@ pdizzApp.config(['$stateProvider', '$urlRouterProvider', 'markedProvider',
                 url: '/blog/post/{postId:int}/edit',
                 templateUrl: 'app/blog/view/blog-edit.html',
                 controller: 'PostEditController'
+            })
+
+            .state('login', {
+                url: '/login',
+                templateUrl: 'app/auth/login.html',
+                controller: 'LoginController'
             });
 
         markedProvider.setOptions({

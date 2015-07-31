@@ -22,6 +22,7 @@ return array(
         'ZF\\Rest',
         'ZF\\Rpc',
         'ZF\\Versioning',
+        'Auth',
         'DbAdapter',
         'Sql',
         'BlogApi',

@@ -1,18 +1,33 @@
 'use strict';
 
-var blogModule = angular.module('blogModule', ['ngResource', 'ui.router']);
+var BlogModule = angular.module('BlogModule', ['ngResource', 'ui.router']);
 
-blogModule.factory('PostResource', ['$resource',
-    function ($resource) {
+BlogModule.factory('PostResource', ['$resource', '$cookieStore',
+    function ($resource, $cookieStore) {
         return $resource('api/blog/post/:postId', {}, {
             query: {method: 'GET', isArray: false},
-            update: {method: 'PUT'}
+            save: {
+                method: 'POST',
+                headers: {
+                    'Api-Key': function () {
+                        return $cookieStore.get('token');
+                    }
+                }
+            },
+            update: {
+                method: 'PUT',
+                headers: {
+                    'Api-Key': function () {
+                        return $cookieStore.get('token');
+                    }
+                }
+            }
         });
     }
 ]);
 
 // Cut string length on whitespace instead of mid word
-blogModule.filter('cut', function () {
+BlogModule.filter('cut', function () {
     return function (value, wordwise, max) {
         if (!value) return '';
 
@@ -32,7 +47,7 @@ blogModule.filter('cut', function () {
     };
 });
 
-blogModule.controller('PostListController', ['$scope', '$state', '$stateParams', 'PostResource',
+BlogModule.controller('PostListController', ['$scope', '$state', '$stateParams', 'PostResource',
     function ($scope, $state, $stateParams, PostResource) {
         PostResource.query(
             {'is_visible': 1, 'page': $stateParams.page, 'page_size': 5},
@@ -54,7 +69,7 @@ blogModule.controller('PostListController', ['$scope', '$state', '$stateParams',
     }
 ]);
 
-blogModule.controller('PostViewController', ['$scope', '$stateParams', 'PostResource',
+BlogModule.controller('PostViewController', ['$scope', '$stateParams', 'PostResource',
     function ($scope, $stateParams, PostResource) {
         $scope.post = PostResource.get({postId: $stateParams.postId});
 
@@ -69,7 +84,7 @@ blogModule.controller('PostViewController', ['$scope', '$stateParams', 'PostReso
     }
 ]);
 
-blogModule.controller('PostCreateController', ['$scope', '$state', 'PostResource',
+BlogModule.controller('PostCreateController', ['$scope', '$state', 'PostResource',
     function ($scope, $state, PostResource) {
         $scope.post = new PostResource();
         $scope.addPost = function () {
@@ -81,7 +96,7 @@ blogModule.controller('PostCreateController', ['$scope', '$state', 'PostResource
     }
 ]);
 
-blogModule.controller('PostEditController', ['$scope', '$stateParams', 'PostResource',
+BlogModule.controller('PostEditController', ['$scope', '$stateParams', 'PostResource',
     function ($scope, $stateParams, PostResource) {
         $scope.post = PostResource.get({postId: $stateParams.postId});
         $scope.updatePost = function () {

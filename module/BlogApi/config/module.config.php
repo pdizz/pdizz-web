@@ -255,7 +255,7 @@ return array(
             'BlogApi\\V1\\Rest\\Post\\Controller' => array(
                 'collection' => array(
                     'GET' => false,
-                    'POST' => false,
+                    'POST' => true,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
@@ -263,25 +263,25 @@ return array(
                 'entity' => array(
                     'GET' => false,
                     'POST' => false,
-                    'PUT' => false,
-                    'PATCH' => false,
-                    'DELETE' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
                 ),
             ),
             'BlogApi\\V1\\Rest\\Asset\\Controller' => array(
                 'collection' => array(
-                    'GET' => false,
-                    'POST' => false,
+                    'GET' => true,
+                    'POST' => true,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
                 ),
                 'entity' => array(
-                    'GET' => false,
-                    'POST' => false,
+                    'GET' => true,
+                    'POST' => true,
                     'PUT' => false,
                     'PATCH' => false,
-                    'DELETE' => false,
+                    'DELETE' => true,
                 ),
             ),
         ),
