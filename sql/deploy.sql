@@ -5,6 +5,7 @@
 
 source table/blog_post.table
 source table/blog_asset.table
+source table/contact_request.table
 
 -- Foreign keys
 

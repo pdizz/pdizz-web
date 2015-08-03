@@ -1,0 +1,9 @@
+<?php
+return [
+    'contact' => [
+        // Email address to send contact requests
+        'email' => 'blah@blah.blah',
+        // Email address to use as sender
+        'from' => 'no-reply@something.somewhere'
+    ]
+];
