@@ -9,7 +9,8 @@
     "angular-ui-router": "~0.2.15",
     "angular-marked": "~0.0.21",
     "angular-resource": "~1.4.3",
-    "highlightjs": "~8.6.0"
+    "highlightjs": "~8.6.0",
+    "angular-cookies": "~1.4.3"
   },
   "private": true
 }
