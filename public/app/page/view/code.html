@@ -1,3 +1,35 @@
 <div class="blog-main">
     <h1>Projects</h1>
+
+    <h2>Bin-packing for School Pictures</h2>
+    <p>Bin packing algorithm derived from
+        <a href="https://github.com/jakesgordon/bin-packing">github.com/jakesgordon/bin-packing</a>
+        and adapted to pack to multiple growing bins with a fixed maximum size.</p>
+    <p>This algorithm will pack multiple images to fit on variable-length sheets
+        printed on roll-paper. It is used in printing school picture packages e.g. a
+        sheet of wallets. Because the length of the sheets varies the size of the "bin"
+        or sheet must grow to fit the images as they're added without wasting extra space
+        or requiring the paper to be cut by hand.</p>
+
+    <a href="http://embed.plnkr.co/tm3RXY9hlpyd8d8AN2Ez/preview" target="_blank">demo...</a>
+    <a href="https://github.com/pdizz/Packager" target="_blank">source...</a>
+    <br />
+    <br />
+
+    <h2>This Site</h2>
+    <p>This site showcases what I've learned so far of REST API development in Zendframework 2 and Apigility.
+        While it probably seems over-engineered for a project of this size, the techniques used in
+        implementing the API represent what I've learned in developing and maintaining a large software
+        application shared by a team of developers. Separating the Model layer into its own module and removing
+        its dependency on the API allows those services to be easily reused in other API's, CLI's, or applications.
+        Using dependency injection using factories and Zendframework 2's service locator pattern allows for services
+        that are reusable and easy to test.</p>
+    <p>I wanted to use this site as an opportunity to learn a new JavaScript framework. I tried React and AngularJS
+        and settled on Angular because of how it can be easily integrated with existing HTML and the separation of
+        HTML and JavaScript. As an experienced backend developer I liked the idea of React being only a view layer,
+        with one-way data binding mitigating a lot of the issues with UI development involving maintaining state,
+        but struggled with mixing logic and templates (JSX).</p>
+    <a href="https://github.com/pdizz/pdizz-web" target="_blank">source...</a>
+    <br />
+    <br />
 </div>
